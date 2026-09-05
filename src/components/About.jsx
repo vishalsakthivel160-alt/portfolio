@@ -4,7 +4,7 @@ import { useReveal } from "../hooks/useReveal";
 import "./About.css";
 
 const infoCards = [
-  { icon: <FiBookOpen />, label: "2nd Year CSE Student" },
+  { icon: <FiBookOpen />, label: "Computer Science & Engineering Student" },
   { icon: <FiCode />, label: "Developer" },
   { icon: <FiGlobe />, label: "Freelancer" },
   { icon: <FiShoppingBag />, label: "E-commerce Entrepreneur" },
@@ -28,6 +28,26 @@ export default function About() {
 
         <div className="about__grid" ref={ref}>
           <div className={`about__text reveal ${isVisible ? "is-visible" : ""}`}>
+            {profile.profileImage && (
+              <div style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
+                <img
+                  src={profile.profileImage}
+                  alt={profile.name}
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    border: "2px solid var(--accent-color, #38bdf8)",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                  }}
+                />
+                <div>
+                  <h3 style={{ fontSize: "1.1rem", fontWeight: "700", margin: 0 }}>{profile.name}</h3>
+                  <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: 0 }}>{profile.status}</p>
+                </div>
+              </div>
+            )}
             {aboutParagraphs.map((para, i) => (
               <p key={i}>{para}</p>
             ))}

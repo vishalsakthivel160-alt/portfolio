@@ -47,11 +47,37 @@ export default function Contact() {
 
     setStatus("submitting");
 
-    // Form submission action (e.g. mailto dispatch)
+    const web3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (web3Key) {
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            access_key: web3Key,
+            name: form.name,
+            email: form.email,
+            message: form.message,
+            subject: `New Portfolio Message from ${form.name}`,
+          }),
+        });
+        const res = await response.json();
+        if (res.success) {
+          setStatus("success");
+          setForm(initialForm);
+          setTimeout(() => setStatus("idle"), 4000);
+          return;
+        }
+      } catch (err) {
+        console.error("Web3Forms submission error:", err);
+      }
+    }
+
+    // Direct mailto fallback containing Customer Name, Email, and Message
     const mailtoUri = `mailto:${email}?subject=${encodeURIComponent(
       `Portfolio Contact from ${form.name}`
     )}&body=${encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+      `Customer Name: ${form.name}\nCustomer Email: ${form.email}\n\nMessage:\n${form.message}`
     )}`;
 
     window.location.href = mailtoUri;

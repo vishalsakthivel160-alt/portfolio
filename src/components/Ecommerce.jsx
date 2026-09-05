@@ -41,25 +41,29 @@ export default function Ecommerce() {
               )}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
                 <span className="tag" style={{ fontSize: "0.75rem" }}>{product.category || "Product"}</span>
-                <span style={{ fontSize: "0.75rem", color: "#4ade80", fontWeight: "600", display: "flex", alignItems: "center", gap: "0.25rem" }}>
-                  <FiCheckCircle /> {product.stockStatus || "In Stock"}
-                </span>
+                {product.stockStatus && (
+                  <span style={{ fontSize: "0.75rem", color: "#4ade80", fontWeight: "600", display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                    <FiCheckCircle /> {product.stockStatus}
+                  </span>
+                )}
               </div>
 
               <h3 style={{ fontSize: "1.2rem", fontWeight: "700", marginBottom: "0.5rem" }}>{product.name}</h3>
               <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginBottom: "1rem" }}>{product.description}</p>
 
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "auto", paddingTop: "1rem", borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
-                <div>
-                  <span style={{ fontSize: "1.3rem", fontWeight: "800", color: "#f8fafc" }}>
-                    ₹{product.price}
-                  </span>
-                  {product.discountPrice && (
-                    <span style={{ textDecoration: "line-through", color: "#94a3b8", fontSize: "0.85rem", marginLeft: "0.5rem" }}>
-                      ₹{product.discountPrice}
+              <div style={{ display: "flex", justifyContent: product.price ? "space-between" : "flex-end", alignItems: "center", marginTop: "auto", paddingTop: "1rem", borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+                {product.price && (
+                  <div>
+                    <span style={{ fontSize: "1.3rem", fontWeight: "800", color: "#f8fafc" }}>
+                      ₹{product.price}
                     </span>
-                  )}
-                </div>
+                    {product.discountPrice && (
+                      <span style={{ textDecoration: "line-through", color: "#94a3b8", fontSize: "0.85rem", marginLeft: "0.5rem" }}>
+                        ₹{product.discountPrice}
+                      </span>
+                    )}
+                  </div>
+                )}
 
                 <a
                   href={product.buyNowUrl}

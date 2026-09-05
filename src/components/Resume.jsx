@@ -6,19 +6,19 @@ import "./Resume.css";
 const resumeSections = [
   {
     title: "Education",
-    content: "B.E. Computer Science and Engineering – 2nd Year",
+    content: "B.E. Computer Science and Engineering",
   },
   {
     title: "Technical Skills",
-    content: "Programming, Web Development, React.js, Git/GitHub, Data Structures & OOP",
+    content: "Web Development (HTML, CSS, Basic JavaScript), C, C++, Basic Python, OOP, Microsoft Office",
   },
   {
     title: "Projects",
-    content: "Teacher Period Assistant & Web/E-Commerce Applications",
+    content: "Teacher Period Assistant",
   },
   {
-    title: "Freelancing & E-Commerce",
-    content: "Digital Web Development Freelancing & Online Store Operations",
+    title: "Strengths & Languages",
+    content: "Quick Learner, Team Player, Problem Solving | English, Tamil, Hindi, Malayalam, German",
   },
 ];
 

@@ -1,4 +1,4 @@
-import { FiMapPin, FiCalendar, FiFlag } from "react-icons/fi";
+import { FiMapPin, FiFlag } from "react-icons/fi";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Education.css";
@@ -18,9 +18,7 @@ export default function Education() {
         <div ref={ref} className={`education__card card reveal ${isVisible ? "is-visible" : ""}`}>
           <div className="education__timeline-dot" aria-hidden="true" />
           <div className="education__main">
-            <span className="education__status">{education.status}</span>
             <h3 className="education__degree">{education.degree}</h3>
-            <p className="education__year">{education.year}</p>
           </div>
 
           <div className="education__meta">
@@ -36,13 +34,6 @@ export default function Education() {
               <div>
                 <span className="education__meta-label">Location</span>
                 <span className="education__meta-value">{education.location}</span>
-              </div>
-            </div>
-            <div className="education__meta-item">
-              <FiCalendar />
-              <div>
-                <span className="education__meta-label">Expected Graduation</span>
-                <span className="education__meta-value">{education.expectedGraduation}</span>
               </div>
             </div>
           </div>

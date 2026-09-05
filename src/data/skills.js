@@ -1,30 +1,31 @@
-// Edit this file to add, remove, or reorganize skills.
-// Each category has a title, an icon key (see Skills.jsx for the icon map), and an items array.
+// ============================================================
+// SKILLS DATA FILE
+// ============================================================
 
 export const skillCategories = [
   {
-    title: "Programming Languages",
-    icon: "code",
-    items: ["C", "C++", "Python", "JavaScript"],
-  },
-  {
     title: "Web Development",
     icon: "web",
-    items: ["HTML", "CSS", "JavaScript", "React.js", "Responsive Web Design"],
+    items: ["HTML", "CSS Fundamentals", "Basic JavaScript"],
   },
   {
-    title: "Development Tools",
-    icon: "tools",
-    items: ["Git", "GitHub", "VS Code"],
+    title: "Programming Languages",
+    icon: "code",
+    items: ["C", "C++", "Basic Python"],
   },
   {
-    title: "Computer Science Fundamentals",
+    title: "Concepts",
     icon: "cs",
-    items: ["Data Structures & Algorithms", "Object-Oriented Programming", "Problem Solving"],
+    items: ["Object-Oriented Programming (OOP)"],
   },
   {
-    title: "Other Interests",
+    title: "Tools & Software",
+    icon: "tools",
+    items: ["Microsoft Office"],
+  },
+  {
+    title: "Key Strengths",
     icon: "interest",
-    items: ["Artificial Intelligence", "Emerging Technologies", "Entrepreneurship"],
+    items: ["Quick Learner", "Team Player", "Problem Solving", "Communication Skills", "Time Management"],
   },
 ];
