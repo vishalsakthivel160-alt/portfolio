@@ -4,13 +4,13 @@ import { useReveal } from "../hooks/useReveal";
 import "./Ecommerce.css";
 
 export default function Ecommerce() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
 
   return (
-    <section id="ecommerce" className="section ecommerce">
+    <section id="ecommerce" ref={ref} className="section ecommerce">
       <div className="ecommerce__pattern" aria-hidden="true" />
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker commerce">06 · E-Commerce Showcase</span>
           <h2 className="section-title">E-Commerce Products & Services</h2>
           <p className="section-desc">
@@ -19,12 +19,12 @@ export default function Ecommerce() {
           </p>
         </div>
 
-        <div ref={ref} className="ecommerce__grid">
+        <div className="ecommerce__grid">
           {products.map((product, i) => (
             <div
               key={product.id || product.name}
-              className={`ecommerce__card card reveal ${isVisible ? "is-visible" : ""}`}
-              style={{ transitionDelay: `${i * 70}ms` }}
+              className="ecommerce__card card reveal"
+              style={{ transitionDelay: `${i * 80}ms` }}
             >
               {product.image && (
                 <img

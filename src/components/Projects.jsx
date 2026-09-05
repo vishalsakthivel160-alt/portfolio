@@ -40,12 +40,12 @@ function ProjectLinks({ project }) {
 }
 
 export default function Projects() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
 
   return (
-    <section id="projects" className="section projects">
+    <section id="projects" ref={ref} className="section projects">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker">04 · Projects</span>
           <h2 className="section-title">Projects</h2>
           <p className="section-desc">
@@ -53,9 +53,12 @@ export default function Projects() {
           </p>
         </div>
 
-        <div ref={ref}>
+        <div>
           {featuredProject && (
-            <article className={`project project--featured card reveal ${isVisible ? "is-visible" : ""}`}>
+            <article
+              className="project project--featured card reveal"
+              style={{ transitionDelay: "120ms" }}
+            >
               <span className="project__featured-badge">
                 <FiStar /> Featured Project
               </span>
@@ -96,7 +99,7 @@ export default function Projects() {
             {otherProjects.map((project, i) => (
               <article
                 key={project.name}
-                className={`project card reveal ${isVisible ? "is-visible" : ""}`}
+                className="project card reveal"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 {project.image && (

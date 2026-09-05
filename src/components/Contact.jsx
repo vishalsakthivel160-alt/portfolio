@@ -7,7 +7,7 @@ import "./Contact.css";
 const initialForm = { name: "", email: "", message: "" };
 
 export default function Contact() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
@@ -88,9 +88,9 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section contact">
+    <section id="contact" ref={ref} className="section contact">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker">09 · Contact</span>
           <h2 className="section-title">Get in touch</h2>
           <p className="section-desc">
@@ -98,8 +98,8 @@ export default function Contact() {
           </p>
         </div>
 
-        <div ref={ref} className="contact__grid">
-          <div className={`contact__info reveal ${isVisible ? "is-visible" : ""}`}>
+        <div className="contact__grid">
+          <div className="contact__info reveal" style={{ transitionDelay: "120ms" }}>
             <a className="contact__info-row" href={`mailto:${email}`}>
               <FiMail />
               <div>
@@ -140,7 +140,8 @@ export default function Contact() {
           </div>
 
           <form
-            className={`contact__form card reveal ${isVisible ? "is-visible" : ""}`}
+            className="contact__form card reveal"
+            style={{ transitionDelay: "200ms" }}
             onSubmit={handleSubmit}
             noValidate
           >

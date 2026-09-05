@@ -4,18 +4,18 @@ import { useReveal } from "../hooks/useReveal";
 import "./Education.css";
 
 export default function Education() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
   const { education } = profile;
 
   return (
-    <section id="education" className="section education">
+    <section id="education" ref={ref} className="section education">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker">02 · Education</span>
           <h2 className="section-title">Education</h2>
         </div>
 
-        <div ref={ref} className={`education__card card reveal ${isVisible ? "is-visible" : ""}`}>
+        <div className="education__card card reveal" style={{ transitionDelay: "120ms" }}>
           <div className="education__timeline-dot" aria-hidden="true" />
           <div className="education__main">
             <h3 className="education__degree">{education.degree}</h3>

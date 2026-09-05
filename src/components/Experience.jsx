@@ -12,21 +12,21 @@ const iconMap = {
 };
 
 export default function Experience() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
 
   return (
-    <section id="experience" className="section experience">
+    <section id="experience" ref={ref} className="section experience">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker">07 · Experience</span>
           <h2 className="section-title">Experience & Activities</h2>
         </div>
 
-        <div ref={ref} className="experience__timeline">
+        <div className="experience__timeline">
           {experienceItems.map((item, i) => (
             <div
               key={item.title}
-              className={`experience__item reveal ${isVisible ? "is-visible" : ""}`}
+              className="experience__item reveal"
               style={{ transitionDelay: `${i * 90}ms` }}
             >
               <div className="experience__marker">{iconMap[item.icon]}</div>

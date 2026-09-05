@@ -12,12 +12,12 @@ const iconMap = {
 };
 
 export default function Skills() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
 
   return (
-    <section id="skills" className="section skills">
+    <section id="skills" ref={ref} className="section skills">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker">03 · Skills</span>
           <h2 className="section-title">Technical Skills</h2>
           <p className="section-desc">
@@ -25,11 +25,11 @@ export default function Skills() {
           </p>
         </div>
 
-        <div ref={ref} className="skills__grid">
+        <div className="skills__grid">
           {skillCategories.map((category, i) => (
             <div
               key={category.title}
-              className={`skills__card card reveal ${isVisible ? "is-visible" : ""}`}
+              className="skills__card card reveal"
               style={{ transitionDelay: `${i * 70}ms` }}
             >
               <div className="skills__card-head">

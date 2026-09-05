@@ -12,12 +12,12 @@ const iconMap = {
 };
 
 export default function Freelancing() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
 
   return (
-    <section id="freelancing" className="section freelancing">
+    <section id="freelancing" ref={ref} className="section freelancing">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker">05 · Freelancing</span>
           <h2 className="section-title">Freelancing</h2>
           <p className="section-desc">
@@ -26,11 +26,11 @@ export default function Freelancing() {
           </p>
         </div>
 
-        <div ref={ref} className="freelancing__grid">
+        <div className="freelancing__grid">
           {freelancingServices.map((service, i) => (
             <div
               key={service.title}
-              className={`freelancing__card card reveal ${isVisible ? "is-visible" : ""}`}
+              className="freelancing__card card reveal"
               style={{ transitionDelay: `${i * 70}ms` }}
             >
               <span className="freelancing__icon">{iconMap[service.icon]}</span>
@@ -40,7 +40,7 @@ export default function Freelancing() {
           ))}
         </div>
 
-        <div className="freelancing__cta">
+        <div className="freelancing__cta reveal" style={{ transitionDelay: "200ms" }}>
           <div>
             <h3>Let's Work Together</h3>
             <p>Have a project in mind? I'd love to hear about it.</p>

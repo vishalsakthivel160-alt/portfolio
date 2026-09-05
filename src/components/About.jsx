@@ -12,22 +12,22 @@ const infoCards = [
 ];
 
 export default function About() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
 
   const aboutParagraphs = Array.isArray(profile.aboutText)
     ? profile.aboutText
     : (profile.aboutText || "").split("\n\n");
 
   return (
-    <section id="about" className="section about">
+    <section id="about" ref={ref} className="section about">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker">01 · About</span>
           <h2 className="section-title">A bit about me</h2>
         </div>
 
-        <div className="about__grid" ref={ref}>
-          <div className={`about__text reveal ${isVisible ? "is-visible" : ""}`}>
+        <div className="about__grid">
+          <div className="about__text reveal" style={{ transitionDelay: "120ms" }}>
             {profile.profileImage && (
               <div style={{ marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
                 <img
@@ -57,8 +57,8 @@ export default function About() {
             {infoCards.map((card, i) => (
               <div
                 key={card.label}
-                className={`about__card card reveal ${isVisible ? "is-visible" : ""}`}
-                style={{ transitionDelay: `${i * 70}ms` }}
+                className="about__card card reveal"
+                style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <span className="about__card-icon">{card.icon}</span>
                 <span>{card.label}</span>

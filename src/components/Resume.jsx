@@ -23,19 +23,19 @@ const resumeSections = [
 ];
 
 export default function Resume() {
-  const { ref, isVisible } = useReveal();
+  const { ref } = useReveal();
   const resumePath = profile.resumePath;
 
   return (
-    <section id="resume" className="section resume">
+    <section id="resume" ref={ref} className="section resume">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
           <span className="section-kicker">08 · Resume</span>
           <h2 className="section-title">My Resume</h2>
           <p className="section-desc">A snapshot of my qualifications — view or download the full PDF below.</p>
         </div>
 
-        <div ref={ref} className={`resume__panel card reveal ${isVisible ? "is-visible" : ""}`}>
+        <div className="resume__panel card reveal" style={{ transitionDelay: "120ms" }}>
           <div className="resume__list">
             {resumeSections.map((item) => (
               <div key={item.title} className="resume__row">

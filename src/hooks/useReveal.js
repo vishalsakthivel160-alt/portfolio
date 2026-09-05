@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-// Adds a "is-visible" class to an element once it scrolls into view.
-// Respects prefers-reduced-motion by revealing immediately, no animation.
-export function useReveal(options = {}) {
+// Attaches an IntersectionObserver to all .reveal elements inside the container.
+// Each element animates smoothly when it individually enters the viewport as the user scrolls.
+// Respects prefers-reduced-motion for accessibility.
+export function useReveal() {
   const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
@@ -12,26 +12,50 @@ export function useReveal(options = {}) {
 
     const prefersReduced = window.matchMedia?.(
       "(prefers-reduced-motion: reduce)"
-    ).matches;
+    )?.matches;
+
+    const elements = Array.from(node.querySelectorAll(".reveal"));
+    if (node.classList.contains("reveal")) {
+      elements.push(node);
+    }
 
     if (prefersReduced) {
-      setIsVisible(true);
+      elements.forEach((el) => el.classList.add("is-visible"));
       return;
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(node);
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
       },
-      { threshold: 0.15, ...options }
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -40px 0px",
+      }
     );
 
-    observer.observe(node);
-    return () => observer.disconnect();
+    elements.forEach((el) => observer.observe(el));
+
+    const timer = setTimeout(() => {
+      const currentElements = Array.from(node.querySelectorAll(".reveal"));
+      if (node.classList.contains("reveal")) currentElements.push(node);
+      currentElements.forEach((el) => {
+        if (!el.classList.contains("is-visible")) {
+          observer.observe(el);
+        }
+      });
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
-  return { ref, isVisible };
+  return { ref };
 }
