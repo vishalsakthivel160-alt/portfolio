@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import { FiSun, FiMoon, FiMenu, FiX, FiDownload } from "react-icons/fi";
 import { navLinks } from "../data/navLinks";
-import { useData } from "../context/DataContext";
+import { profile } from "../data/profile";
 import { useActiveSection } from "../hooks/useActiveSection";
 import "./Navbar.css";
 
 export default function Navbar({ theme, toggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { profile, resume } = useData();
   const sectionIds = navLinks.map((link) => link.to);
   const { activeId, scrolled } = useActiveSection(sectionIds);
 
-  const name = profile?.name || "Vishal Sakthivel R";
-  const resumeUrl = resume?.resumeUrl || null;
+  const name = profile.name || "Vishal Sakthivel R";
+  const resumePath = profile.resumePath;
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -53,9 +52,11 @@ export default function Navbar({ theme, toggleTheme }) {
           >
             {theme === "dark" ? <FiSun /> : <FiMoon />}
           </button>
-          {resumeUrl ? (
+          {resumePath ? (
             <a
-              href={resumeUrl}
+              href={resumePath}
+              target="_blank"
+              rel="noreferrer"
               download
               className="btn btn-outline btn-sm navbar__resume-btn"
             >
@@ -92,9 +93,11 @@ export default function Navbar({ theme, toggleTheme }) {
             </li>
           ))}
         </ul>
-        {resumeUrl ? (
+        {resumePath ? (
           <a
-            href={resumeUrl}
+            href={resumePath}
+            target="_blank"
+            rel="noreferrer"
             download
             className="btn btn-primary navbar__mobile-resume"
             onClick={handleLinkClick}

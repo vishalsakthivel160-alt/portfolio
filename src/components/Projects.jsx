@@ -1,5 +1,5 @@
 import { FiGithub, FiExternalLink, FiStar } from "react-icons/fi";
-import { useData } from "../context/DataContext";
+import { featuredProject, otherProjects } from "../data/projects";
 import { useReveal } from "../hooks/useReveal";
 import "./Projects.css";
 
@@ -16,7 +16,7 @@ function ProjectLinks({ project }) {
           <FiExternalLink /> Live Demo
         </a>
       ) : (
-        <button className="btn btn-primary btn-sm" disabled>
+        <button className="btn btn-primary btn-sm" disabled title="Live demo link not available yet">
           <FiExternalLink /> Live Demo Soon
         </button>
       )}
@@ -31,7 +31,7 @@ function ProjectLinks({ project }) {
           <FiGithub /> GitHub Repo
         </a>
       ) : (
-        <button className="btn btn-outline btn-sm" disabled>
+        <button className="btn btn-outline btn-sm" disabled title="GitHub repository link not available yet">
           <FiGithub /> Repository Soon
         </button>
       )}
@@ -40,70 +40,78 @@ function ProjectLinks({ project }) {
 }
 
 export default function Projects() {
-  const { projects } = useData();
   const { ref, isVisible } = useReveal();
-
-  const projectList = projects || [];
-  const featured = projectList.find((p) => p.featured) || projectList[0];
-  const others = featured ? projectList.filter((p) => p.id !== featured.id) : projectList;
 
   return (
     <section id="projects" className="section projects">
       <div className="container">
         <div className="section-head">
           <span className="section-kicker">04 · Projects</span>
-          <h2 className="section-title">My Projects</h2>
+          <h2 className="section-title">Projects</h2>
           <p className="section-desc">
-            Projects added and managed in real-time from the Admin portal.
+            A showcase of what I've built and what's currently in progress.
           </p>
         </div>
 
         <div ref={ref}>
-          {featured && (
+          {featuredProject && (
             <article className={`project project--featured card reveal ${isVisible ? "is-visible" : ""}`}>
               <span className="project__featured-badge">
                 <FiStar /> Featured Project
               </span>
-              {featured.image && (
-                <img src={featured.image} alt={featured.name} style={{ width: "100%", maxHeight: "250px", objectFit: "cover", borderRadius: "8px", marginBottom: "1rem" }} />
+              {featuredProject.image && (
+                <img
+                  src={featuredProject.image}
+                  alt={featuredProject.name}
+                  style={{ width: "100%", maxHeight: "240px", objectFit: "cover", borderRadius: "8px", marginBottom: "1rem" }}
+                />
               )}
-              <h3 className="project__name">{featured.name}</h3>
-              <p className="project__desc">{featured.description}</p>
+              <h3 className="project__name">{featuredProject.name}</h3>
+              <p className="project__desc">{featuredProject.description}</p>
 
               <div className="project__tags">
-                {(typeof featured.technologies === "string"
-                  ? featured.technologies.split(",")
-                  : featured.technologies || []
-                ).map((tech, idx) => (
-                  <span key={idx} className="tag">
-                    {tech.trim()}
+                {featuredProject.technologies.map((tech) => (
+                  <span key={tech} className="tag">
+                    {tech}
                   </span>
                 ))}
               </div>
 
-              <ProjectLinks project={featured} />
+              {featuredProject.features && (
+                <div className="project__features">
+                  <h4>Key Features</h4>
+                  <ul>
+                    {featuredProject.features.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <ProjectLinks project={featuredProject} />
             </article>
           )}
 
           <div className="projects__grid" style={{ marginTop: "2rem" }}>
-            {others.map((project, i) => (
+            {otherProjects.map((project, i) => (
               <article
-                key={project.id || i}
+                key={project.name}
                 className={`project card reveal ${isVisible ? "is-visible" : ""}`}
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 {project.image && (
-                  <img src={project.image} alt={project.name} style={{ width: "100%", height: "160px", objectFit: "cover", borderRadius: "6px", marginBottom: "1rem" }} />
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    style={{ width: "100%", height: "160px", objectFit: "cover", borderRadius: "6px", marginBottom: "1rem" }}
+                  />
                 )}
                 <h3 className="project__name">{project.name}</h3>
                 <p className="project__desc">{project.description}</p>
                 <div className="project__tags">
-                  {(typeof project.technologies === "string"
-                    ? project.technologies.split(",")
-                    : project.technologies || []
-                  ).map((tech, idx) => (
-                    <span key={idx} className="tag">
-                      {tech.trim()}
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className="tag">
+                      {tech}
                     </span>
                   ))}
                 </div>

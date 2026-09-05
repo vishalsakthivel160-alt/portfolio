@@ -1,5 +1,5 @@
 import { FiBookOpen, FiCode, FiGlobe, FiShoppingBag, FiTrendingUp } from "react-icons/fi";
-import { useData } from "../context/DataContext";
+import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./About.css";
 
@@ -12,15 +12,11 @@ const infoCards = [
 ];
 
 export default function About() {
-  const { profile } = useData();
   const { ref, isVisible } = useReveal();
 
-  const aboutContent = profile?.aboutText
-    ? profile.aboutText.split("\n\n").filter(Boolean)
-    : [
-        "I am a second-year Computer Science Engineering student passionate about technology, software development, and entrepreneurship.",
-        "Alongside academics, I am building experience through freelancing and e-commerce.",
-      ];
+  const aboutParagraphs = Array.isArray(profile.aboutText)
+    ? profile.aboutText
+    : (profile.aboutText || "").split("\n\n");
 
   return (
     <section id="about" className="section about">
@@ -32,7 +28,7 @@ export default function About() {
 
         <div className="about__grid" ref={ref}>
           <div className={`about__text reveal ${isVisible ? "is-visible" : ""}`}>
-            {aboutContent.map((para, i) => (
+            {aboutParagraphs.map((para, i) => (
               <p key={i}>{para}</p>
             ))}
           </div>

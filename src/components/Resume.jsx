@@ -1,12 +1,12 @@
 import { FiDownload, FiEye, FiFileText } from "react-icons/fi";
-import { useData } from "../context/DataContext";
+import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Resume.css";
 
 const resumeSections = [
   {
     title: "Education",
-    content: "B.E. Computer Science and Engineering – Currently Pursuing",
+    content: "B.E. Computer Science and Engineering – 2nd Year",
   },
   {
     title: "Technical Skills",
@@ -14,20 +14,17 @@ const resumeSections = [
   },
   {
     title: "Projects",
-    content: "Real-world web solutions, Teacher Period Assistant & E-Commerce applications",
+    content: "Teacher Period Assistant & Web/E-Commerce Applications",
   },
   {
     title: "Freelancing & E-Commerce",
-    content: "Web development freelancing & digital store product operations",
+    content: "Digital Web Development Freelancing & Online Store Operations",
   },
 ];
 
 export default function Resume() {
-  const { resume } = useData();
   const { ref, isVisible } = useReveal();
-
-  const resumeUrl = resume?.resumeUrl || null;
-  const fileName = resume?.fileName || "Resume.pdf";
+  const resumePath = profile.resumePath;
 
   return (
     <section id="resume" className="section resume">
@@ -35,7 +32,7 @@ export default function Resume() {
         <div className="section-head">
           <span className="section-kicker">08 · Resume</span>
           <h2 className="section-title">My Resume</h2>
-          <p className="section-desc">View or download my official curriculum vitae.</p>
+          <p className="section-desc">A snapshot of my qualifications — view or download the full PDF below.</p>
         </div>
 
         <div ref={ref} className={`resume__panel card reveal ${isVisible ? "is-visible" : ""}`}>
@@ -49,10 +46,10 @@ export default function Resume() {
           </div>
 
           <div className="resume__download">
-            {resumeUrl ? (
+            {resumePath ? (
               <div className="resume__action-buttons" style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
                 <a
-                  href={resumeUrl}
+                  href={resumePath}
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-outline"
@@ -60,8 +57,8 @@ export default function Resume() {
                   <FiEye /> View Resume
                 </a>
                 <a
-                  href={resumeUrl}
-                  download={fileName}
+                  href={resumePath}
+                  download="Vishal-Sakthivel-R-Resume.pdf"
                   className="btn btn-primary"
                 >
                   <FiDownload /> Download Resume
@@ -70,8 +67,8 @@ export default function Resume() {
             ) : (
               <div style={{ textAlign: "center", color: "var(--text-muted)" }}>
                 <FiFileText style={{ fontSize: "2rem", marginBottom: "0.5rem" }} />
-                <p><strong>Resume coming soon</strong></p>
-                <span style={{ fontSize: "0.85rem" }}>Upload PDF from the /admin portal</span>
+                <p><strong>Resume will be available soon.</strong></p>
+                <span style={{ fontSize: "0.85rem" }}>Place your PDF inside public/resume/ and update src/data/profile.js</span>
               </div>
             )}
           </div>

@@ -1,15 +1,13 @@
 import { FiArrowRight, FiDownload, FiMail, FiCamera, FiEye } from "react-icons/fi";
-import { useData } from "../context/DataContext";
+import { profile } from "../data/profile";
 import "./Hero.css";
 
 export default function Hero() {
-  const { profile, resume, contact } = useData();
-
-  const name = profile?.name || "Vishal Sakthivel R";
-  const shortHeadline = profile?.shortHeadline || "Computer Science Engineering Student & Aspiring Software Developer";
-  const heroDescription = profile?.heroDescription || "Building my skills in technology, developing real-world projects, exploring freelancing, and growing an e-commerce business.";
-  const profileImage = profile?.profileImage || null;
-  const resumeUrl = resume?.resumeUrl || null;
+  const name = profile.name || "Vishal Sakthivel R";
+  const role = profile.shortHeadline || profile.role;
+  const heroDescription = profile.heroDescription;
+  const profileImage = profile.profileImage;
+  const resumePath = profile.resumePath;
 
   const initials = name
     .split(" ")
@@ -26,20 +24,20 @@ export default function Hero() {
             <span className="hero__dot" /> Available for internships & freelance work
           </p>
           <h1 className="hero__name">{name}</h1>
-          <h2 className="hero__role">{shortHeadline}</h2>
+          <h2 className="hero__role">{role}</h2>
           <p className="hero__desc">{heroDescription}</p>
 
           <div className="hero__actions">
             <a href="#projects" className="btn btn-primary">
               View Projects <FiArrowRight />
             </a>
-            {resumeUrl ? (
-              <a href={resumeUrl} download="Resume.pdf" className="btn btn-outline">
+            {resumePath ? (
+              <a href={resumePath} target="_blank" rel="noreferrer" download className="btn btn-outline">
                 <FiDownload /> Download Resume
               </a>
             ) : (
-              <button className="btn btn-outline" disabled title="No resume uploaded yet">
-                <FiDownload /> Resume coming soon
+              <button className="btn btn-outline" disabled title="Resume will be available soon">
+                <FiDownload /> Resume will be available soon
               </button>
             )}
             <a href="#contact" className="btn btn-ghost">
@@ -57,7 +55,7 @@ export default function Hero() {
                 <span>{initials}</span>
                 <div className="hero__photo-hint">
                   <FiCamera />
-                  <span>Photo uploaded via /admin</span>
+                  <span>Add photo in src/assets/profile/</span>
                 </div>
               </div>
             )}

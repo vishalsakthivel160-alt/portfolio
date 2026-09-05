@@ -1,15 +1,13 @@
-import { FiGithub, FiLinkedin, FiMail, FiArrowUp, FiLock } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail, FiArrowUp } from "react-icons/fi";
 import { navLinks } from "../data/navLinks";
-import { useData } from "../context/DataContext";
+import { profile } from "../data/profile";
 import "./Footer.css";
 
 export default function Footer() {
-  const { profile, contact } = useData();
-
-  const name = profile?.name || "Vishal Sakthivel R";
-  const github = contact?.github || "https://github.com";
-  const linkedin = contact?.linkedin || "https://linkedin.com";
-  const email = contact?.email || "your.email@example.com";
+  const name = profile.name || "Vishal Sakthivel R";
+  const github = profile.social.github;
+  const linkedin = profile.social.linkedin;
+  const email = profile.contact.email;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -53,30 +51,9 @@ export default function Footer() {
       <div className="container footer__bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <p>© {new Date().getFullYear()} {name}. All Rights Reserved.</p>
         
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <a
-            href="/admin"
-            title="Admin Login Portal"
-            style={{
-              fontSize: "0.8rem",
-              color: "var(--text-muted)",
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.25rem",
-              opacity: 0.6,
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
-          >
-            <FiLock style={{ fontSize: "0.75rem" }} /> Admin
-          </a>
-          
-          <button className="footer__top-btn" onClick={scrollToTop} aria-label="Back to top">
-            <FiArrowUp />
-          </button>
-        </div>
+        <button className="footer__top-btn" onClick={scrollToTop} aria-label="Back to top">
+          <FiArrowUp />
+        </button>
       </div>
     </footer>
   );

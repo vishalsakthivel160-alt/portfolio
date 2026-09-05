@@ -1,11 +1,11 @@
 import { FiMapPin, FiCalendar, FiFlag } from "react-icons/fi";
-import { personalInfo } from "../data/personalInfo";
+import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Education.css";
 
 export default function Education() {
   const { ref, isVisible } = useReveal();
-  const { education } = personalInfo;
+  const { education } = profile;
 
   return (
     <section id="education" className="section education">

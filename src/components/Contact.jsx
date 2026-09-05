@@ -1,25 +1,22 @@
 import { useState } from "react";
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
-import { useData } from "../context/DataContext";
+import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiSend, FiCheckCircle } from "react-icons/fi";
+import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Contact.css";
 
 const initialForm = { name: "", email: "", message: "" };
 
 export default function Contact() {
-  const { contact } = useData();
   const { ref, isVisible } = useReveal();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
-  const [serverMsg, setServerMsg] = useState("");
+  const [status, setStatus] = useState("idle");
 
-  const email = contact?.email || "your.email@example.com";
-  const phone = contact?.phone || "+91 00000 00000";
-  const location = contact?.location || "[Your City, India]";
-  const github = contact?.github || "https://github.com";
-  const linkedin = contact?.linkedin || "https://linkedin.com";
-  const accessKey = contact?.accessKey || "";
+  const email = profile.contact.email;
+  const phone = profile.contact.phone;
+  const location = profile.contact.location;
+  const github = profile.social.github;
+  const linkedin = profile.social.linkedin;
 
   const validate = (values) => {
     const next = {};
@@ -49,52 +46,19 @@ export default function Contact() {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus("submitting");
-    setServerMsg("");
 
-    try {
-      if (accessKey) {
-        // Submit directly to Web3Forms to send email straight to user's inbox
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            access_key: accessKey,
-            name: form.name,
-            email: form.email,
-            message: form.message,
-            subject: `New Portfolio Message from ${form.name}`,
-          }),
-        });
+    // Form submission action (e.g. mailto dispatch)
+    const mailtoUri = `mailto:${email}?subject=${encodeURIComponent(
+      `Portfolio Contact from ${form.name}`
+    )}&body=${encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+    )}`;
 
-        const data = await res.json();
-        if (data.success) {
-          setStatus("success");
-          setServerMsg("Message sent successfully! I will receive it directly in my inbox.");
-          setForm(initialForm);
-        } else {
-          throw new Error(data.message || "Failed to send email.");
-        }
-      } else {
-        // Fallback: Open mailto client directly with pre-filled message so email gets sent
-        const mailtoUri = `mailto:${email}?subject=${encodeURIComponent(
-          `Portfolio Contact from ${form.name}`
-        )}&body=${encodeURIComponent(
-          `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-        )}`;
-        window.location.href = mailtoUri;
+    window.location.href = mailtoUri;
 
-        setStatus("success");
-        setServerMsg(`Opening mail client to send message directly to ${email}!`);
-        setForm(initialForm);
-      }
-    } catch (err) {
-      setStatus("error");
-      setServerMsg(err.message || "Something went wrong sending your message.");
-    } finally {
-      setTimeout(() => {
-        if (status === "success") setStatus("idle");
-      }, 5000);
-    }
+    setStatus("success");
+    setForm(initialForm);
+    setTimeout(() => setStatus("idle"), 4000);
   };
 
   return (
@@ -211,18 +175,18 @@ export default function Contact() {
             <button type="submit" className="btn btn-primary contact__submit" disabled={status === "submitting"}>
               {status === "success" ? (
                 <>
-                  <FiCheckCircle /> Message Sent!
+                  <FiCheckCircle /> Opening Mail Client...
                 </>
               ) : (
                 <>
-                  <FiSend /> {status === "submitting" ? "Sending Email..." : "Send Message"}
+                  <FiSend /> {status === "submitting" ? "Sending..." : "Send Message"}
                 </>
               )}
             </button>
 
-            {serverMsg && (
-              <p className={`contact__success-note ${status === "error" ? "text-red" : ""}`} role="status">
-                {serverMsg}
+            {status === "success" && (
+              <p className="contact__success-note" role="status">
+                Thanks for reaching out! Opening your default mail client to send email to {email}.
               </p>
             )}
           </form>
