@@ -1,0 +1,77 @@
+.ecommerce {
+  position: relative;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+.ecommerce__pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--border) 1.4px, transparent 1.4px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 60% 50% at 85% 20%, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 85% 20%, black 0%, transparent 70%);
+  opacity: 0.6;
+}
+
+.ecommerce .container {
+  position: relative;
+  z-index: 1;
+}
+
+.ecommerce__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1000px) {
+  .ecommerce__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .ecommerce__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ecommerce__card {
+  padding: 24px 20px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--commerce);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ecommerce__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px -22px rgba(240, 166, 59, 0.35);
+}
+
+.ecommerce__card h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.ecommerce__card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.ecommerce__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--commerce-soft);
+  color: var(--commerce);
+  font-size: 1.15rem;
+  margin-bottom: 14px;
+}

@@ -1,0 +1,6 @@
+Put your actual resume PDF in this folder and name it:
+
+Vishal-Sakthivel-R-Resume.pdf
+
+The site links to /resume/Vishal-Sakthivel-R-Resume.pdf (see src/data/personalInfo.js -> resumePath).
+Once you add the real file here, delete this placeholder text file.
