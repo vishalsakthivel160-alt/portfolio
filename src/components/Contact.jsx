@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiSend, FiCheckCircle } from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Contact.css";
@@ -11,6 +11,7 @@ export default function Contact() {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
+  const [serverError, setServerError] = useState("");
 
   const email = profile.contact.email;
   const phone = profile.contact.phone;
@@ -37,6 +38,13 @@ export default function Contact() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+    if (status === "error") {
+      setStatus("idle");
+      setServerError("");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -46,45 +54,49 @@ export default function Contact() {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus("submitting");
+    setServerError("");
 
     const web3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-    if (web3Key) {
-      try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            access_key: web3Key,
-            name: form.name,
-            email: form.email,
-            message: form.message,
-            subject: `New Portfolio Message from ${form.name}`,
-          }),
-        });
-        const res = await response.json();
-        if (res.success) {
-          setStatus("success");
-          setForm(initialForm);
-          setTimeout(() => setStatus("idle"), 4000);
-          return;
-        }
-      } catch (err) {
-        console.error("Web3Forms submission error:", err);
-      }
+
+    if (!web3Key || web3Key === "YOUR_WEB3FORMS_ACCESS_KEY") {
+      setStatus("error");
+      setServerError(
+        "Email service key missing. Please configure VITE_WEB3FORMS_ACCESS_KEY in your environment variables (.env file)."
+      );
+      return;
     }
 
-    // Direct mailto fallback containing Customer Name, Email, and Message
-    const mailtoUri = `mailto:${email}?subject=${encodeURIComponent(
-      `Portfolio Contact from ${form.name}`
-    )}&body=${encodeURIComponent(
-      `Customer Name: ${form.name}\nCustomer Email: ${form.email}\n\nMessage:\n${form.message}`
-    )}`;
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: web3Key,
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+          subject: `New Portfolio Message from ${form.name.trim()}`,
+          from_name: "Portfolio Contact Form",
+        }),
+      });
 
-    window.location.href = mailtoUri;
-
-    setStatus("success");
-    setForm(initialForm);
-    setTimeout(() => setStatus("idle"), 4000);
+      const res = await response.json();
+      if (response.ok && res.success) {
+        setStatus("success");
+        setForm(initialForm);
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setServerError(res.message || "Failed to send message via email service. Please try again.");
+      }
+    } catch (err) {
+      console.error("Web3Forms submission error:", err);
+      setStatus("error");
+      setServerError("Network connection error. Please check your internet connection and try again.");
+    }
   };
 
   return (
@@ -202,7 +214,7 @@ export default function Contact() {
             <button type="submit" className="btn btn-primary contact__submit" disabled={status === "submitting"}>
               {status === "success" ? (
                 <>
-                  <FiCheckCircle /> Opening Mail Client...
+                  <FiCheckCircle /> Message Sent!
                 </>
               ) : (
                 <>
@@ -213,8 +225,29 @@ export default function Contact() {
 
             {status === "success" && (
               <p className="contact__success-note" role="status">
-                Thanks for reaching out! Opening your default mail client to send email to {email}.
+                Thanks for reaching out! Your message has been sent successfully to {email}.
               </p>
+            )}
+
+            {status === "error" && (
+              <div className="contact__error-banner" role="alert">
+                <FiAlertCircle />
+                <div>
+                  <p className="contact__error-title">{serverError || "Failed to send message."}</p>
+                  <p className="contact__error-subtext">
+                    Alternatively, you can email directly at{" "}
+                    <a
+                      href={`mailto:${email}?subject=${encodeURIComponent(
+                        `Portfolio Contact from ${form.name || "Visitor"}`
+                      )}&body=${encodeURIComponent(
+                        `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
+                      )}`}
+                    >
+                      {email}
+                    </a>
+                  </p>
+                </div>
+              </div>
             )}
           </form>
         </div>
@@ -222,3 +255,4 @@ export default function Contact() {
     </section>
   );
 }
+
