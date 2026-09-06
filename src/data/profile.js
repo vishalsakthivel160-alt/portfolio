@@ -23,7 +23,7 @@ export const profile = {
 
   education: {
     degree: "B.E. Computer Science and Engineering",
-    institution: "Christian College of Engineering and Technical",
+    institution: "Christian College of Engineering and Technology",
     location: "Oddanchatram, Dindigul, India",
   },
 

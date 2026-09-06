@@ -1,4 +1,4 @@
-import { FiArrowRight, FiDownload, FiMail, FiCamera } from "react-icons/fi";
+import { FiArrowRight, FiMail, FiCamera } from "react-icons/fi";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Hero.css";
@@ -9,7 +9,6 @@ export default function Hero() {
   const role = profile.shortHeadline || profile.role;
   const heroDescription = profile.heroDescription;
   const profileImage = profile.profileImage;
-  const resumePath = profile.resumePath;
 
   const initials = name
     .split(" ")
@@ -39,16 +38,7 @@ export default function Hero() {
             <a href="#projects" className="btn btn-primary">
               View Projects <FiArrowRight />
             </a>
-            {resumePath ? (
-              <a href={resumePath} target="_blank" rel="noreferrer" download className="btn btn-outline">
-                <FiDownload /> Download Resume
-              </a>
-            ) : (
-              <button className="btn btn-outline" disabled title="Resume will be available soon">
-                <FiDownload /> Resume will be available soon
-              </button>
-            )}
-            <a href="#contact" className="btn btn-ghost">
+            <a href="#contact" className="btn btn-outline">
               <FiMail /> Contact Me
             </a>
           </div>

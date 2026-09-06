@@ -28,10 +28,8 @@ export const personalInfo = {
     degree: "B.E. Computer Science and Engineering",
     status: "Currently Pursuing",
     year: "2nd Year",
-    // EDIT ME: fill in your actual institution details
-    institution: "[Your College / University Name]",
-    location: "[Your City, State]",
-    expectedGraduation: "[Expected Graduation Year]",
+    institution: "Christian College of Engineering and Technology",
+    location: "Oddanchatram, Dindigul, India",
   },
 
   contact: {

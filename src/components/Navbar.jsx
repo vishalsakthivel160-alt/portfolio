@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiSun, FiMoon, FiMenu, FiX, FiDownload } from "react-icons/fi";
+import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import { navLinks } from "../data/navLinks";
 import { profile } from "../data/profile";
 import { useActiveSection } from "../hooks/useActiveSection";
@@ -11,7 +11,6 @@ export default function Navbar({ theme, toggleTheme }) {
   const { activeId, scrolled } = useActiveSection(sectionIds);
 
   const name = profile.name || "Vishal Sakthivel R";
-  const resumePath = profile.resumePath;
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -52,21 +51,6 @@ export default function Navbar({ theme, toggleTheme }) {
           >
             {theme === "dark" ? <FiSun /> : <FiMoon />}
           </button>
-          {resumePath ? (
-            <a
-              href={resumePath}
-              target="_blank"
-              rel="noreferrer"
-              download
-              className="btn btn-outline btn-sm navbar__resume-btn"
-            >
-              <FiDownload /> Resume
-            </a>
-          ) : (
-            <a href="#resume" className="btn btn-outline btn-sm navbar__resume-btn">
-              <FiDownload /> Resume
-            </a>
-          )}
           <button
             className="navbar__icon-btn navbar__hamburger"
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -93,26 +77,6 @@ export default function Navbar({ theme, toggleTheme }) {
             </li>
           ))}
         </ul>
-        {resumePath ? (
-          <a
-            href={resumePath}
-            target="_blank"
-            rel="noreferrer"
-            download
-            className="btn btn-primary navbar__mobile-resume"
-            onClick={handleLinkClick}
-          >
-            <FiDownload /> Download Resume
-          </a>
-        ) : (
-          <a
-            href="#resume"
-            className="btn btn-primary navbar__mobile-resume"
-            onClick={handleLinkClick}
-          >
-            <FiDownload /> Resume
-          </a>
-        )}
       </div>
     </header>
   );
