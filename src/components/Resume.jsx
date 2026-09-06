@@ -18,7 +18,7 @@ const resumeSections = [
   },
   {
     title: "Strengths & Languages",
-    content: "Quick Learner, Team Player, Problem Solving | English, Tamil, Hindi, Malayalam, German",
+    content: "Quick Learner, Team Player, Problem Solving | Tamil — Fluent, English — Fluent, Hindi — Basic conversation, Malayalam — Basic Conversation, German — Learning",
   },
 ];
 

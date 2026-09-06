@@ -28,4 +28,15 @@ export const skillCategories = [
     icon: "interest",
     items: ["Quick Learner", "Team Player", "Problem Solving", "Communication Skills", "Time Management"],
   },
+  {
+    title: "Languages",
+    icon: "globe",
+    items: [
+      "Tamil — Fluent",
+      "English — Fluent",
+      "Hindi — Basic conversation",
+      "Malayalam — Basic Conversation",
+      "German — Learning",
+    ],
+  },
 ];

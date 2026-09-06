@@ -62,3 +62,26 @@
   border-color: var(--accent) !important;
   color: var(--accent-2) !important;
 }
+
+.skills__chip--lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-2);
+}
+
+.skills__lang-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.skills__lang-sep {
+  color: var(--text-faint);
+  font-size: 0.65rem;
+}
+
+.skills__lang-level {
+  color: var(--accent-2);
+  font-size: 0.72rem;
+  font-weight: 500;
+}

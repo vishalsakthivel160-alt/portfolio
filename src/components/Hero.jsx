@@ -21,30 +21,30 @@ export default function Hero() {
       <div className="hero__grid-bg" aria-hidden="true" />
       <div className="container hero__inner">
         <div className="hero__content">
-          <p className="hero__eyebrow reveal" style={{ transitionDelay: "0ms" }}>
+          <p className="hero__eyebrow reveal" style={{ transitionDelay: "100ms" }}>
             <span className="hero__dot" /> Available for internships & freelance work
           </p>
-          <h1 className="hero__name reveal" style={{ transitionDelay: "100ms" }}>
+          <h1 className="hero__name reveal" style={{ transitionDelay: "180ms" }}>
             {name}
           </h1>
-          <h2 className="hero__role reveal" style={{ transitionDelay: "200ms" }}>
+          <h2 className="hero__role reveal" style={{ transitionDelay: "260ms" }}>
             {role}
           </h2>
-          <p className="hero__desc reveal" style={{ transitionDelay: "300ms" }}>
+          <p className="hero__desc reveal" style={{ transitionDelay: "340ms" }}>
             {heroDescription}
           </p>
 
-          <div className="hero__actions reveal" style={{ transitionDelay: "400ms" }}>
-            <a href="#projects" className="btn btn-primary">
+          <div className="hero__actions">
+            <a href="#projects" className="btn btn-primary reveal" style={{ transitionDelay: "420ms" }}>
               View Projects <FiArrowRight />
             </a>
-            <a href="#contact" className="btn btn-outline">
+            <a href="#contact" className="btn btn-outline reveal" style={{ transitionDelay: "500ms" }}>
               <FiMail /> Contact Me
             </a>
           </div>
         </div>
 
-        <div className="hero__visual reveal" style={{ transitionDelay: "250ms" }}>
+        <div className="hero__visual reveal" style={{ transitionDelay: "300ms" }}>
           <div className="hero__photo-frame">
             {profileImage ? (
               <img src={profileImage} alt={name} />
