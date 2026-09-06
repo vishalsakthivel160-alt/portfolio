@@ -4,11 +4,19 @@
   grid-template-columns: 1.4fr 0.6fr;
   gap: 40px;
   align-items: center;
+  min-width: 0;
+  word-break: break-word;
 }
 
 @media (max-width: 800px) {
   .resume__panel {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .resume__panel {
+    padding: 22px 16px;
   }
 }
 
@@ -44,11 +52,20 @@
   gap: 10px;
   justify-self: center;
   text-align: center;
+  max-width: 100%;
 }
 
 .resume__btn {
   padding: 18px 34px;
   font-size: 1rem;
+  max-width: 100%;
+}
+
+@media (max-width: 480px) {
+  .resume__btn {
+    padding: 14px 20px;
+    font-size: 0.92rem;
+  }
 }
 
 .resume__hint {

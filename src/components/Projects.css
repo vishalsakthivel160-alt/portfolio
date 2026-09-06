@@ -5,6 +5,8 @@
   background:
     linear-gradient(150deg, var(--accent-soft), transparent 55%),
     var(--surface);
+  min-width: 0;
+  word-break: break-word;
 }
 
 .project__featured-badge {
@@ -58,6 +60,7 @@
   font-size: 0.95rem;
   padding-left: 18px;
   position: relative;
+  word-break: break-word;
 }
 
 .project__features li::before {
@@ -98,10 +101,21 @@
   }
 }
 
+@media (max-width: 480px) {
+  .project--featured {
+    padding: 20px 16px;
+  }
+  .projects__grid .project {
+    padding: 20px 16px !important;
+  }
+}
+
 .projects__grid .project {
   padding: 26px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  word-break: break-word;
 }
 
 .projects__grid .project .project__links {

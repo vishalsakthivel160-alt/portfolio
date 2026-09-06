@@ -14,6 +14,8 @@
   top: 0;
   z-index: 100;
   height: var(--nav-height);
+  width: 100%;
+  max-width: 100vw;
   display: flex;
   align-items: center;
   background: transparent;
@@ -35,6 +37,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .navbar__brand {
@@ -162,17 +166,22 @@
   inset: var(--nav-height) 0 0 0;
   background: var(--bg);
   transform: translateX(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, visibility 0.3s ease;
   z-index: 99;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 32px 24px 40px;
   overflow-y: auto;
+  visibility: hidden;
+  pointer-events: none;
+  max-width: 100vw;
 }
 
 .navbar__mobile.is-open {
   transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .navbar__mobile ul {

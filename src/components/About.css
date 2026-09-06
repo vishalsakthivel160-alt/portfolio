@@ -37,6 +37,14 @@
   gap: 12px;
   font-weight: 500;
   font-size: 0.95rem;
+  min-width: 0;
+  word-break: break-word;
+}
+
+@media (max-width: 480px) {
+  .about__card {
+    padding: 16px;
+  }
 }
 
 .about__card:first-child {

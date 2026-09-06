@@ -18,6 +18,14 @@
 
 .skills__card {
   padding: 26px;
+  min-width: 0;
+  word-break: break-word;
+}
+
+@media (max-width: 480px) {
+  .skills__card {
+    padding: 20px 16px;
+  }
 }
 
 .skills__card-head {

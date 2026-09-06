@@ -39,6 +39,12 @@
   }
 }
 
+@media (max-width: 480px) {
+  .ecommerce__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .ecommerce__card {
   padding: 24px 20px;
   border-radius: var(--radius-md);
@@ -46,6 +52,14 @@
   border: 1px solid var(--border);
   border-top: 3px solid var(--commerce);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-width: 0;
+  word-break: break-word;
+}
+
+@media (max-width: 480px) {
+  .ecommerce__card {
+    padding: 18px 16px;
+  }
 }
 
 .ecommerce__card:hover {

@@ -65,12 +65,13 @@
 }
 
 .hero__name {
-  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+  font-size: clamp(1.75rem, 5.4vw, 4.2rem);
   margin-bottom: 14px;
   background: linear-gradient(100deg, var(--text) 40%, var(--accent-2) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  word-break: break-word;
 }
 
 .hero__role {
@@ -118,6 +119,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
 }
 
 .hero__visual.reveal {
@@ -216,11 +218,51 @@
   animation-delay: 2.1s;
 }
 
+@media (max-width: 768px) {
+  .hero__badge--code {
+    top: 2%;
+    left: 2px;
+  }
+
+  .hero__badge--cart {
+    bottom: 5%;
+    left: 2px;
+  }
+
+  .hero__badge--rocket {
+    top: 40%;
+    right: 2px;
+  }
+}
+
 @media (max-width: 560px) {
   .hero__badge {
     width: 44px;
     height: 44px;
     font-size: 1.05rem;
+  }
+
+  .hero__badge--code {
+    top: 0;
+    left: 0;
+  }
+
+  .hero__badge--cart {
+    bottom: 0;
+    left: 0;
+  }
+
+  .hero__badge--rocket {
+    top: 35%;
+    right: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero__badge {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
   }
 }
 

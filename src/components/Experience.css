@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 6px;
   max-width: 760px;
+  width: 100%;
 }
 
 .experience__timeline::before {
@@ -38,6 +39,11 @@
   font-size: 1.1rem;
 }
 
+.experience__body {
+  min-width: 0;
+  word-break: break-word;
+}
+
 .experience__body h3 {
   font-size: 1.05rem;
   margin-bottom: 6px;
@@ -47,4 +53,20 @@
   color: var(--text-muted);
   font-size: 0.96rem;
   max-width: 56ch;
+}
+
+@media (max-width: 480px) {
+  .experience__timeline::before {
+    left: 18px;
+  }
+
+  .experience__item {
+    gap: 14px;
+  }
+
+  .experience__marker {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
 }
