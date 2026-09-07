@@ -19,9 +19,19 @@ export const skillCategories = [
     items: ["Object-Oriented Programming (OOP)"],
   },
   {
-    title: "Tools & Software",
+    title: "Tools & Technologies",
     icon: "tools",
-    items: ["Microsoft Office"],
+    items: [
+      "React.js",
+      "JavaScript",
+      "Node.js",
+      "HTML5",
+      "Vite",
+      "Git",
+      "npm",
+      "package.json",
+      "MS Office",
+    ],
   },
   {
     title: "Key Strengths",

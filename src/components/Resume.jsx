@@ -6,19 +6,19 @@ import "./Resume.css";
 const resumeSections = [
   {
     title: "Education",
-    content: "B.E. Computer Science and Engineering",
+    content: "B.E. Computer Science and Engineering | Christian College of Engineering and Technology (2025 – 2029)",
   },
   {
     title: "Technical Skills",
-    content: "Web Development (HTML, CSS, Basic JavaScript), C, C++, Basic Python, OOP, Microsoft Office",
+    content: "HTML, CSS, JavaScript, React.js, C, C++, Python, OOP, Node.js, Git/GitHub, Microsoft Office",
   },
   {
     title: "Projects",
-    content: "Teacher Period Assistant",
+    content: "Teacher Period Assistant (React.js, JavaScript, Node.js)",
   },
   {
     title: "Strengths & Languages",
-    content: "Quick Learner, Team Player, Problem Solving | Tamil — Fluent, English — Fluent, Hindi — Basic conversation, Malayalam — Basic Conversation, German — Learning",
+    content: "Quick Learner, Team Player, Problem Solving, Communication Skills, Time Management | Tamil, English, Hindi, Malayalam, German",
   },
 ];
 
