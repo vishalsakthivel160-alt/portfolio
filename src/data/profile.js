@@ -33,8 +33,5 @@ export const profile = {
     location: "Dindigul, India",
   },
 
-  social: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-  },
+  social: {},
 };

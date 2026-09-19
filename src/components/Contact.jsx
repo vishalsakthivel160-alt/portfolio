@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Contact.css";
@@ -16,8 +16,6 @@ export default function Contact() {
   const email = profile.contact.email;
   const phone = profile.contact.phone;
   const location = profile.contact.location;
-  const github = profile.social.github;
-  const linkedin = profile.social.linkedin;
 
   const validate = (values) => {
     const next = {};
@@ -135,16 +133,6 @@ export default function Contact() {
             </div>
 
             <div className="contact__socials">
-              {github && (
-                <a href={github} target="_blank" rel="noreferrer" aria-label="GitHub profile">
-                  <FiGithub />
-                </a>
-              )}
-              {linkedin && (
-                <a href={linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
-                  <FiLinkedin />
-                </a>
-              )}
               <a href={`mailto:${email}`} aria-label="Send an email">
                 <FiMail />
               </a>

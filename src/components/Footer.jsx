@@ -1,12 +1,10 @@
-import { FiGithub, FiLinkedin, FiMail, FiArrowUp } from "react-icons/fi";
+import { FiMail, FiArrowUp } from "react-icons/fi";
 import { navLinks } from "../data/navLinks";
 import { profile } from "../data/profile";
 import "./Footer.css";
 
 export default function Footer() {
   const name = profile.name || "Vishal Sakthivel R";
-  const github = profile.social.github;
-  const linkedin = profile.social.linkedin;
   const email = profile.contact.email;
 
   const scrollToTop = () => {
@@ -32,16 +30,6 @@ export default function Footer() {
         </nav>
 
         <div className="footer__socials">
-          {github && (
-            <a href={github} target="_blank" rel="noreferrer" aria-label="GitHub">
-              <FiGithub />
-            </a>
-          )}
-          {linkedin && (
-            <a href={linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <FiLinkedin />
-            </a>
-          )}
           <a href={`mailto:${email}`} aria-label="Email">
             <FiMail />
           </a>

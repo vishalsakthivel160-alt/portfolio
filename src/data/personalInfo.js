@@ -40,9 +40,6 @@ export const personalInfo = {
   },
 
   social: {
-    // EDIT ME: replace with your real profile URLs
-    github: "https://github.com/your-username",
-    linkedin: "https://www.linkedin.com/in/your-username",
     email: "mailto:your.email@example.com",
   },
 };
