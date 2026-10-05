@@ -11,7 +11,7 @@ export default function Ecommerce() {
       <div className="ecommerce__pattern" aria-hidden="true" />
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker commerce">06 · E-Commerce Showcase</span>
+          <span className="section-kicker commerce">07 · E-Commerce Showcase</span>
           <h2 className="section-title">E-Commerce Products & Services</h2>
           <p className="section-desc">
             Alongside my studies, I am building and managing an e-commerce business.

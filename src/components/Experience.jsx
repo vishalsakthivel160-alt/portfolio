@@ -18,7 +18,7 @@ export default function Experience() {
     <section id="experience" ref={ref} className="section experience">
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker">07 · Experience</span>
+          <span className="section-kicker">08 · Experience</span>
           <h2 className="section-title">Experience & Activities</h2>
         </div>
 

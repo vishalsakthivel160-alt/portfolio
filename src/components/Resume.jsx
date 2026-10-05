@@ -30,7 +30,7 @@ export default function Resume() {
     <section id="resume" ref={ref} className="section resume">
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker">08 · Resume</span>
+          <span className="section-kicker">09 · Resume</span>
           <h2 className="section-title">My Resume</h2>
           <p className="section-desc">A snapshot of my qualifications — view or download the full PDF below.</p>
         </div>

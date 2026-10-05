@@ -5,6 +5,7 @@ import About from "./components/About.jsx";
 import Education from "./components/Education.jsx";
 import Skills from "./components/Skills.jsx";
 import Projects from "./components/Projects.jsx";
+import Certifications from "./components/Certifications.jsx";
 import Freelancing from "./components/Freelancing.jsx";
 import Ecommerce from "./components/Ecommerce.jsx";
 import Experience from "./components/Experience.jsx";
@@ -27,6 +28,7 @@ export default function App() {
         <Education />
         <Skills />
         <Projects />
+        <Certifications />
         <Freelancing />
         <Ecommerce />
         <Experience />

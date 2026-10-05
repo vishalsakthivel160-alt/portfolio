@@ -101,7 +101,7 @@ export default function Contact() {
     <section id="contact" ref={ref} className="section contact">
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker">09 · Contact</span>
+          <span className="section-kicker">10 · Contact</span>
           <h2 className="section-title">Get in touch</h2>
           <p className="section-desc">
             Open to internships, freelance projects, and opportunities to connect.

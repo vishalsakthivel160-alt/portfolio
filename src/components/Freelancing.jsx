@@ -18,7 +18,7 @@ export default function Freelancing() {
     <section id="freelancing" ref={ref} className="section freelancing">
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker">05 · Freelancing</span>
+          <span className="section-kicker">06 · Freelancing</span>
           <h2 className="section-title">Freelancing</h2>
           <p className="section-desc">
             I provide freelance digital and web development solutions, focusing on
