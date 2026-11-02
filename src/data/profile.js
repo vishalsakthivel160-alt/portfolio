@@ -28,7 +28,7 @@ export const profile = {
   },
 
   contact: {
-    email: "vishalsakthivel160@gmail.com",
+    email: "rkvishal13@gmail.com",
     phone: "+91 7094556516",
     location: "Dindigul, India",
   },

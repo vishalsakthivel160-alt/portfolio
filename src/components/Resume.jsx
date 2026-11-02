@@ -1,4 +1,4 @@
-import { FiDownload, FiEye, FiFileText } from "react-icons/fi";
+import { FiDownload, FiEye, FiFileText, FiArrowUpRight } from "react-icons/fi";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Resume.css";
@@ -6,19 +6,23 @@ import "./Resume.css";
 const resumeSections = [
   {
     title: "Education",
+    label: "Academic Pathway",
     content: "B.E. Computer Science and Engineering | Christian College of Engineering and Technology (2025 – 2029)",
   },
   {
-    title: "Technical Skills",
-    content: "HTML, CSS, JavaScript, React.js, C, C++, Python, OOP, Node.js, Git/GitHub, Microsoft Office",
+    title: "Technical Stack",
+    label: "Core Engineering Tools",
+    content: "HTML5, Modern CSS, JavaScript (ES6+), React.js, C, C++, Python, Object-Oriented Programming (OOP), Node.js, Git & GitHub, MS Office Suite",
   },
   {
-    title: "Projects",
-    content: "Teacher Period Assistant (React.js, JavaScript, Node.js)",
+    title: "Highlighted Work",
+    label: "Institutional Solution",
+    content: "Teacher Period Assistant (Architected with React.js, JavaScript, and Node.js for academic schedule automation & attendance metrics)",
   },
   {
-    title: "Strengths & Languages",
-    content: "Quick Learner, Team Player, Problem Solving, Communication Skills, Time Management | Tamil, English, Hindi, Malayalam, German",
+    title: "Languages & Strengths",
+    label: "Interpersonal & Polyglot",
+    content: "Fluent in Tamil & English; Conversational in Hindi & Malayalam; German (Elementary learner) | Fast Learner, Systems Thinking, Collaborative Execution",
   },
 ];
 
@@ -27,48 +31,67 @@ export default function Resume() {
   const resumePath = profile.resumePath;
 
   return (
-    <section id="resume" ref={ref} className="section resume">
+    <section id="resume" ref={ref} className="section section--beige resume">
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker">09 · Resume</span>
+          <span className="section-kicker">&mdash; 09 / Professional Resume</span>
           <h2 className="section-title">My Resume</h2>
-          <p className="section-desc">A snapshot of my qualifications — view or download the full PDF below.</p>
+          <p className="section-desc">
+            A concise digest of qualifications, technical capabilities, and academic credentials &mdash; available for immediate review or PDF download.
+          </p>
         </div>
 
-        <div className="resume__panel card reveal" style={{ transitionDelay: "120ms" }}>
-          <div className="resume__list">
+        <div className="resume__sheet card reveal" style={{ transitionDelay: "120ms" }}>
+          <div className="resume__sheet-header">
+            <div className="resume__sheet-title-group">
+              <span className="editorial-label">Official Candidate Record</span>
+              <h3 className="resume__sheet-name">{profile.name}</h3>
+              <p className="resume__sheet-sub">{profile.shortHeadline}</p>
+            </div>
+            <div className="resume__sheet-meta">
+              <span>Location: <strong>Dindigul, Tamil Nadu, India</strong></span>
+              <span>Degree: <strong>B.E. Computer Science and Engineering</strong></span>
+              <span>Institution: <strong>Christian College of Engineering and Technology</strong></span>
+            </div>
+          </div>
+
+          <div className="resume__sheet-body">
             {resumeSections.map((item) => (
-              <div key={item.title} className="resume__row">
-                <h3>{item.title}</h3>
-                <p>{item.content}</p>
+              <div key={item.title} className="resume__section-row">
+                <div className="resume__section-meta">
+                  <span className="editorial-label">{item.label}</span>
+                  <h4 className="resume__section-heading">{item.title}</h4>
+                </div>
+                <div className="resume__section-content">
+                  <p>{item.content}</p>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="resume__download">
+          <div className="resume__sheet-footer">
             {resumePath ? (
-              <div className="resume__action-buttons" style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
+              <div className="resume__actions">
                 <a
                   href={resumePath}
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-outline"
                 >
-                  <FiEye /> View Resume
+                  <FiEye /> View Resume <FiArrowUpRight />
                 </a>
                 <a
                   href={resumePath}
                   download="Vishal-Sakthivel-R-Resume.pdf"
                   className="btn btn-primary"
                 >
-                  <FiDownload /> Download Resume
+                  <FiDownload /> Download Resume (PDF)
                 </a>
               </div>
             ) : (
-              <div style={{ textAlign: "center", color: "var(--text-muted)" }}>
-                <FiFileText style={{ fontSize: "2rem", marginBottom: "0.5rem" }} />
-                <p><strong>Resume will be available soon.</strong></p>
-                <span style={{ fontSize: "0.85rem" }}>Place your PDF inside public/resume/ and update src/data/profile.js</span>
+              <div className="resume__empty">
+                <FiFileText className="resume__empty-icon" />
+                <p>Resume PDF is currently being finalized.</p>
               </div>
             )}
           </div>

@@ -1,4 +1,4 @@
-import { FiTerminal, FiGlobe, FiTool, FiCpu, FiCompass } from "react-icons/fi";
+import { FiTerminal, FiGlobe, FiTool, FiCpu, FiCompass, FiCode } from "react-icons/fi";
 import { skillCategories } from "../data/skills";
 import { useReveal } from "../hooks/useReveal";
 import "./Skills.css";
@@ -16,47 +16,50 @@ export default function Skills() {
   const { ref } = useReveal();
 
   return (
-    <section id="skills" ref={ref} className="section skills">
+    <section id="skills" ref={ref} className="section section--sandal skills">
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker">03 · Skills & Languages</span>
-          <h2 className="section-title">Skills & Languages</h2>
+          <span className="section-kicker">&mdash; 03 / Capabilities &amp; Taxonomy</span>
+          <h2 className="section-title">Skills &amp; Languages</h2>
           <p className="section-desc">
-            Technologies, concepts, and languages I actively use and continue to build on.
+            A structured index of technical tools, foundational computing languages, human communication, and core competencies.
           </p>
         </div>
 
-        <div className="skills__grid">
+        <div className="skills__catalog">
           {skillCategories.map((category, i) => (
-            <div
+            <article
               key={category.title}
-              className="skills__card card reveal"
-              style={{ transitionDelay: `${i * 70}ms` }}
+              className="skills__section-card card reveal"
+              style={{ transitionDelay: `${i * 60}ms` }}
             >
               <div className="skills__card-head">
-                <span className="skills__icon">{iconMap[category.icon] || <FiGlobe />}</span>
-                <h3>{category.title}</h3>
+                <span className="skills__card-index">0{i + 1}</span>
+                <div className="skills__card-title-group">
+                  <span className="skills__card-icon">{iconMap[category.icon] || <FiCode />}</span>
+                  <h3 className="skills__card-title">{category.title}</h3>
+                </div>
               </div>
-              <div className="skills__chips">
+
+              <div className="skills__items-wrap">
                 {category.items.map((item) => {
                   if (item.includes(" — ")) {
                     const [lang, level] = item.split(" — ");
                     return (
-                      <span key={item} className="tag skills__chip skills__chip--lang">
+                      <div key={item} className="skills__lang-pill">
                         <span className="skills__lang-name">{lang}</span>
-                        <span className="skills__lang-sep">•</span>
                         <span className="skills__lang-level">{level}</span>
-                      </span>
+                      </div>
                     );
                   }
                   return (
-                    <span key={item} className="tag skills__chip">
+                    <span key={item} className="skills__item-tag">
                       {item}
                     </span>
                   );
                 })}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

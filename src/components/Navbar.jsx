@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
+import { FiSun, FiMoon, FiMenu, FiX, FiArrowUpRight } from "react-icons/fi";
 import { navLinks } from "../data/navLinks";
 import { profile } from "../data/profile";
 import { useActiveSection } from "../hooks/useActiveSection";
@@ -26,7 +26,10 @@ export default function Navbar({ theme, toggleTheme }) {
       <nav className="container navbar__inner" aria-label="Primary">
         <a href="#home" className="navbar__brand" onClick={handleLinkClick}>
           <span className="navbar__brand-mark">VS</span>
-          <span className="navbar__brand-name">{name}</span>
+          <div className="navbar__brand-text">
+            <span className="navbar__brand-name">{name}</span>
+            <span className="navbar__brand-tag">Portfolio &middot; 2026</span>
+          </div>
         </a>
 
         <ul className="navbar__links">
@@ -43,18 +46,21 @@ export default function Navbar({ theme, toggleTheme }) {
         </ul>
 
         <div className="navbar__actions">
+          <a href="#contact" className="btn btn-primary btn-sm navbar__cta">
+            Contact <FiArrowUpRight />
+          </a>
           <button
             className="navbar__icon-btn"
             onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label={theme === "espresso" ? "Switch to warm sandal theme" : "Switch to espresso dark theme"}
+            title={theme === "espresso" ? "Switch to warm sandal theme" : "Switch to espresso dark theme"}
           >
-            {theme === "dark" ? <FiSun /> : <FiMoon />}
+            {theme === "espresso" ? <FiSun /> : <FiMoon />}
           </button>
           <button
             className="navbar__icon-btn navbar__hamburger"
             onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={menuOpen}
           >
             {menuOpen ? <FiX /> : <FiMenu />}
@@ -62,21 +68,37 @@ export default function Navbar({ theme, toggleTheme }) {
         </div>
       </nav>
 
-      {/* Mobile menu panel */}
-      <div className={`navbar__mobile ${menuOpen ? "is-open" : ""}`}>
-        <ul>
-          {navLinks.map((link) => (
+      {/* Editorial Mobile Navigation Drawer */}
+      <div className={`navbar__mobile ${menuOpen ? "is-open" : ""}`} aria-hidden={!menuOpen}>
+        <div className="navbar__mobile-header">
+          <span className="editorial-label">&mdash; Navigation Index</span>
+          <button
+            className="navbar__icon-btn"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <FiX />
+          </button>
+        </div>
+        <ul className="navbar__mobile-list">
+          {navLinks.map((link, idx) => (
             <li key={link.to}>
               <a
                 href={`#${link.to}`}
-                className={activeId === link.to ? "is-active" : ""}
+                className={`navbar__mobile-link ${activeId === link.to ? "is-active" : ""}`}
                 onClick={handleLinkClick}
               >
-                {link.label}
+                <span className="navbar__mobile-num">0{idx + 1}</span>
+                <span className="navbar__mobile-text">{link.label}</span>
               </a>
             </li>
           ))}
         </ul>
+        <div className="navbar__mobile-footer">
+          <a href="#contact" className="btn btn-primary" style={{ width: "100%" }} onClick={handleLinkClick}>
+            Get in Touch <FiArrowUpRight />
+          </a>
+        </div>
       </div>
     </header>
   );

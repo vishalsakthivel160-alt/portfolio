@@ -33,13 +33,12 @@ export const personalInfo = {
   },
 
   contact: {
-    // EDIT ME: replace with your real contact details before publishing
-    email: "your.email@example.com",
-    phone: "+91 00000 00000",
-    location: "[Your City, India]",
+    email: "rkvishal13@gmail.com",
+    phone: "+91 7094556516",
+    location: "Dindigul, India",
   },
 
   social: {
-    email: "mailto:your.email@example.com",
+    email: "mailto:rkvishal13@gmail.com",
   },
 };

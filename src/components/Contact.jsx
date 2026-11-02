@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle, FiAlertCircle, FiArrowUpRight } from "react-icons/fi";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
 import "./Contact.css";
@@ -26,9 +26,9 @@ export default function Contact() {
       next.email = "Please enter a valid email address.";
     }
     if (!values.message.trim()) {
-      next.message = "Please enter a message.";
+      next.message = "Please write your message.";
     } else if (values.message.trim().length < 10) {
-      next.message = "Message should be at least 10 characters.";
+      next.message = "Message should contain at least 10 characters.";
     }
     return next;
   };
@@ -59,7 +59,7 @@ export default function Contact() {
     if (!web3Key || web3Key === "YOUR_WEB3FORMS_ACCESS_KEY") {
       setStatus("error");
       setServerError(
-        "Email service key missing. Please configure VITE_WEB3FORMS_ACCESS_KEY in your environment variables (.env file)."
+        "Direct email key is not set. You can click the direct email link on the left to write directly to my inbox."
       );
       return;
     }
@@ -76,8 +76,8 @@ export default function Contact() {
           name: form.name.trim(),
           email: form.email.trim(),
           message: form.message.trim(),
-          subject: `New Portfolio Message from ${form.name.trim()}`,
-          from_name: "Portfolio Contact Form",
+          subject: `Portfolio Inquiry from ${form.name.trim()}`,
+          from_name: "Vishal Sakthivel Portfolio",
         }),
       });
 
@@ -85,155 +85,187 @@ export default function Contact() {
       if (response.ok && res.success) {
         setStatus("success");
         setForm(initialForm);
-        setTimeout(() => setStatus("idle"), 5000);
+        setTimeout(() => setStatus("idle"), 6000);
       } else {
         setStatus("error");
-        setServerError(res.message || "Failed to send message via email service. Please try again.");
+        setServerError(res.message || "Failed to send message. Please contact via direct email.");
       }
     } catch (err) {
       console.error("Web3Forms submission error:", err);
       setStatus("error");
-      setServerError("Network connection error. Please check your internet connection and try again.");
+      setServerError("Network error. Please use direct email to reach out.");
     }
   };
 
   return (
-    <section id="contact" ref={ref} className="section contact">
+    <section id="contact" ref={ref} className="section section--sandal contact">
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker">10 · Contact</span>
-          <h2 className="section-title">Get in touch</h2>
+          <span className="section-kicker">&mdash; 10 / Direct Dialogue</span>
+          <h2 className="section-title">Initiate Contact</h2>
           <p className="section-desc">
-            Open to internships, freelance projects, and opportunities to connect.
+            Open for software internships, technical development roles, freelance collaboration, and engineering discourse.
           </p>
         </div>
 
-        <div className="contact__grid">
-          <div className="contact__info reveal" style={{ transitionDelay: "120ms" }}>
-            <a className="contact__info-row" href={`mailto:${email}`}>
-              <FiMail />
-              <div>
-                <span>Email</span>
-                <strong>{email}</strong>
-              </div>
-            </a>
-            <a className="contact__info-row" href={`tel:${phone}`}>
-              <FiPhone />
-              <div>
-                <span>Phone</span>
-                <strong>{phone}</strong>
-              </div>
-            </a>
-            <div className="contact__info-row">
-              <FiMapPin />
-              <div>
-                <span>Location</span>
-                <strong>{location}</strong>
+        <div className="contact__layout">
+          {/* Direct channels dossier */}
+          <div className="contact__dossier reveal" style={{ transitionDelay: "120ms" }}>
+            <span className="editorial-label" style={{ marginBottom: "16px", display: "block" }}>
+              Primary Correspondence
+            </span>
+
+            <div className="contact__card card">
+              <a className="contact__channel-row" href={`mailto:${email}`}>
+                <div className="contact__channel-icon"><FiMail /></div>
+                <div className="contact__channel-info">
+                  <span className="contact__channel-label">Direct Electronic Mail</span>
+                  <strong className="contact__channel-val">{email}</strong>
+                </div>
+                <FiArrowUpRight className="contact__channel-arrow" />
+              </a>
+
+              <a className="contact__channel-row" href={`tel:${phone}`}>
+                <div className="contact__channel-icon"><FiPhone /></div>
+                <div className="contact__channel-info">
+                  <span className="contact__channel-label">Telephone &amp; Mobile</span>
+                  <strong className="contact__channel-val">{phone}</strong>
+                </div>
+                <FiArrowUpRight className="contact__channel-arrow" />
+              </a>
+
+              <div className="contact__channel-row contact__channel-row--static">
+                <div className="contact__channel-icon"><FiMapPin /></div>
+                <div className="contact__channel-info">
+                  <span className="contact__channel-label">Physical Residence &amp; Campus</span>
+                  <strong className="contact__channel-val">{location} &middot; Christian College of Engg.</strong>
+                </div>
               </div>
             </div>
 
-            <div className="contact__socials">
-              <a href={`mailto:${email}`} aria-label="Send an email">
-                <FiMail />
-              </a>
+            <div className="contact__schedule-note">
+              <p>
+                <strong>Availability Status:</strong> Actively preparing for upcoming technical internships &amp; development projects. Inquiries typically receive a reply within 24 hours.
+              </p>
             </div>
           </div>
 
+          {/* Editorial Form */}
           <form
             className="contact__form card reveal"
             style={{ transitionDelay: "200ms" }}
             onSubmit={handleSubmit}
             noValidate
           >
+            <div className="contact__form-head">
+              <span className="editorial-label">Dispatch Form</span>
+              <h3 className="contact__form-title">Send a Written Message</h3>
+            </div>
+
             <div className="contact__field">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name" className="contact__label">
+                Full Name <span aria-hidden="true">*</span>
+              </label>
               <input
                 id="name"
                 name="name"
                 type="text"
+                className="contact__input"
+                placeholder="e.g. Eleanor Vance"
                 value={form.name}
                 onChange={handleChange}
                 aria-invalid={Boolean(errors.name)}
                 aria-describedby={errors.name ? "name-error" : undefined}
               />
               {errors.name && (
-                <span className="contact__error" id="name-error">
+                <span className="contact__error-text" id="name-error">
                   {errors.name}
                 </span>
               )}
             </div>
 
             <div className="contact__field">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" className="contact__label">
+                Electronic Mail Address <span aria-hidden="true">*</span>
+              </label>
               <input
                 id="email"
                 name="email"
                 type="email"
+                className="contact__input"
+                placeholder="e.g. eleanor@example.com"
                 value={form.email}
                 onChange={handleChange}
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? "email-error" : undefined}
               />
               {errors.email && (
-                <span className="contact__error" id="email-error">
+                <span className="contact__error-text" id="email-error">
                   {errors.email}
                 </span>
               )}
             </div>
 
             <div className="contact__field">
-              <label htmlFor="message">Message</label>
+              <label htmlFor="message" className="contact__label">
+                Message Content <span aria-hidden="true">*</span>
+              </label>
               <textarea
                 id="message"
                 name="message"
                 rows={5}
+                className="contact__textarea"
+                placeholder="Please outline your project goals, role requirements, or general message..."
                 value={form.message}
                 onChange={handleChange}
                 aria-invalid={Boolean(errors.message)}
                 aria-describedby={errors.message ? "message-error" : undefined}
               />
               {errors.message && (
-                <span className="contact__error" id="message-error">
+                <span className="contact__error-text" id="message-error">
                   {errors.message}
                 </span>
               )}
             </div>
 
-            <button type="submit" className="btn btn-primary contact__submit" disabled={status === "submitting"}>
+            <button
+              type="submit"
+              className="btn btn-primary contact__submit-btn"
+              disabled={status === "submitting"}
+            >
               {status === "success" ? (
                 <>
-                  <FiCheckCircle /> Message Sent!
+                  <FiCheckCircle /> Transmission Successful
                 </>
               ) : (
                 <>
-                  <FiSend /> {status === "submitting" ? "Sending..." : "Send Message"}
+                  <FiSend /> {status === "submitting" ? "Transmitting..." : "Dispatch Message"}
                 </>
               )}
             </button>
 
             {status === "success" && (
-              <p className="contact__success-note" role="status">
-                Thanks for reaching out! Your message has been sent successfully to {email}.
-              </p>
+              <div className="contact__success-box" role="status">
+                <FiCheckCircle />
+                <p>Thank you for reaching out. Your transmission has been dispatched.</p>
+              </div>
             )}
 
             {status === "error" && (
-              <div className="contact__error-banner" role="alert">
+              <div className="contact__error-box" role="alert">
                 <FiAlertCircle />
                 <div>
-                  <p className="contact__error-title">{serverError || "Failed to send message."}</p>
-                  <p className="contact__error-subtext">
-                    Alternatively, you can email directly at{" "}
-                    <a
-                      href={`mailto:${email}?subject=${encodeURIComponent(
-                        `Portfolio Contact from ${form.name || "Visitor"}`
-                      )}&body=${encodeURIComponent(
-                        `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-                      )}`}
-                    >
-                      {email}
-                    </a>
-                  </p>
+                  <p className="contact__error-title">{serverError}</p>
+                  <a
+                    className="contact__error-direct-link"
+                    href={`mailto:${email}?subject=${encodeURIComponent(
+                      `Portfolio Inquiry from ${form.name || "Colleague"}`
+                    )}&body=${encodeURIComponent(
+                      `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
+                    )}`}
+                  >
+                    Click here to open your default mail client &rarr;
+                  </a>
                 </div>
               </div>
             )}
@@ -243,4 +275,3 @@ export default function Contact() {
     </section>
   );
 }
-

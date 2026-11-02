@@ -1,5 +1,6 @@
-import { FiShoppingCart, FiExternalLink, FiCheckCircle } from "react-icons/fi";
+import { FiShoppingCart, FiExternalLink, FiCheckCircle, FiPackage, FiTrendingUp } from "react-icons/fi";
 import { products } from "../data/products";
+import { ecommerceAreas } from "../data/ecommerce";
 import { useReveal } from "../hooks/useReveal";
 import "./Ecommerce.css";
 
@@ -7,76 +8,81 @@ export default function Ecommerce() {
   const { ref } = useReveal();
 
   return (
-    <section id="ecommerce" ref={ref} className="section ecommerce">
-      <div className="ecommerce__pattern" aria-hidden="true" />
+    <section id="ecommerce" ref={ref} className="section section--cream ecommerce">
       <div className="container">
         <div className="section-head reveal" style={{ transitionDelay: "0ms" }}>
-          <span className="section-kicker commerce">07 · E-Commerce Showcase</span>
-          <h2 className="section-title">E-Commerce Products & Services</h2>
+          <span className="section-kicker">&mdash; 07 / Commercial Venture</span>
+          <h2 className="section-title">E-Commerce Enterprise</h2>
           <p className="section-desc">
-            Alongside my studies, I am building and managing an e-commerce business.
-            Explore products and service packages below.
+            Independent online commerce ventures combining supply logistics, marketplace distribution, customer experience, and digital operations.
           </p>
         </div>
 
-        <div className="ecommerce__grid">
-          {products.map((product, i) => (
-            <div
-              key={product.id || product.name}
-              className="ecommerce__card card reveal"
-              style={{ transitionDelay: `${i * 80}ms` }}
-            >
-              {product.image && (
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                    marginBottom: "1rem",
-                  }}
-                />
-              )}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
-                <span className="tag" style={{ fontSize: "0.75rem" }}>{product.category || "Product"}</span>
-                {product.stockStatus && (
-                  <span style={{ fontSize: "0.75rem", color: "#4ade80", fontWeight: "600", display: "flex", alignItems: "center", gap: "0.25rem" }}>
-                    <FiCheckCircle /> {product.stockStatus}
-                  </span>
-                )}
-              </div>
+        <div className="ecommerce__layout">
+          {/* Featured Product Box */}
+          <div className="ecommerce__products-col">
+            <span className="editorial-label" style={{ marginBottom: "16px", display: "block" }}>
+              Active Marketplace Catalog
+            </span>
 
-              <h3 style={{ fontSize: "1.2rem", fontWeight: "700", marginBottom: "0.5rem" }}>{product.name}</h3>
-              <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginBottom: "1rem" }}>{product.description}</p>
-
-              <div style={{ display: "flex", justifyContent: product.price ? "space-between" : "flex-end", alignItems: "center", marginTop: "auto", paddingTop: "1rem", borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
-                {product.price && (
-                  <div>
-                    <span style={{ fontSize: "1.3rem", fontWeight: "800", color: "#f8fafc" }}>
-                      ₹{product.price}
+            {products.map((product, i) => (
+              <article
+                key={product.id || product.name}
+                className="ecom-product-card card reveal"
+                style={{ transitionDelay: `${i * 90}ms` }}
+              >
+                <div className="ecom-product-card__header">
+                  <div className="ecom-product-card__tag-row">
+                    <span className="tag">Botanical / Wellness</span>
+                    <span className="ecom-product-card__stock">
+                      <FiCheckCircle /> Verified Marketplace Listing
                     </span>
-                    {product.discountPrice && (
-                      <span style={{ textDecoration: "line-through", color: "#94a3b8", fontSize: "0.85rem", marginLeft: "0.5rem" }}>
-                        ₹{product.discountPrice}
-                      </span>
-                    )}
                   </div>
-                )}
+                  <h3 className="ecom-product-card__name">{product.name}</h3>
+                  <p className="ecom-product-card__desc">{product.description}</p>
+                </div>
 
-                <a
-                  href={product.buyNowUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-primary btn-sm"
-                  style={{ gap: "0.375rem" }}
+                <div className="ecom-product-card__footer">
+                  <div className="ecom-product-card__platform">
+                    <span className="ecom-product-card__platform-label">Marketplace</span>
+                    <strong className="ecom-product-card__platform-val">Flipkart India</strong>
+                  </div>
+
+                  <a
+                    href={product.buyNowUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-primary btn-sm"
+                  >
+                    View on Flipkart <FiExternalLink />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Operational Domains */}
+          <div className="ecommerce__operations-col">
+            <span className="editorial-label" style={{ marginBottom: "16px", display: "block" }}>
+              Operational Disciplines
+            </span>
+
+            <div className="ecommerce__ops-grid">
+              {ecommerceAreas.map((area, i) => (
+                <div
+                  key={area.title}
+                  className="ecom-op-card card reveal"
+                  style={{ transitionDelay: `${(i + 2) * 60}ms` }}
                 >
-                  Buy Now <FiExternalLink />
-                </a>
-              </div>
+                  <div className="ecom-op-card__head">
+                    <span className="ecom-op-card__num">0{i + 1}</span>
+                    <h4 className="ecom-op-card__title">{area.title}</h4>
+                  </div>
+                  <p className="ecom-op-card__desc">{area.description}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

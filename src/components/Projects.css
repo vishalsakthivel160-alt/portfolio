@@ -1,124 +1,130 @@
-.project--featured {
+.project-feature {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   padding: 40px;
-  margin-bottom: 28px;
-  position: relative;
-  background:
-    linear-gradient(150deg, var(--accent-soft), transparent 55%),
-    var(--surface);
-  min-width: 0;
-  word-break: break-word;
+  box-shadow: var(--shadow-editorial);
 }
 
-.project__featured-badge {
+@media (max-width: 680px) {
+  .project-feature {
+    padding: 24px 20px;
+  }
+}
+
+.project-feature__masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-strong);
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.project-feature__badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--accent-2);
-  background: var(--accent-soft);
-  padding: 5px 12px;
-  border-radius: 999px;
-  margin-bottom: 18px;
-}
-
-.project__name {
-  font-size: 1.35rem;
-  margin-bottom: 10px;
-}
-
-.project__desc {
-  color: var(--text-muted);
-  margin-bottom: 18px;
-  max-width: 65ch;
-}
-
-.project__tags {
-  display: flex;
-  flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 20px;
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  font-weight: 700;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
+  padding: 6px 14px;
+  border-radius: var(--radius-xs);
 }
 
-.project__features h4 {
-  font-size: 0.85rem;
-  font-family: var(--font-mono);
-  color: var(--text-faint);
-  margin-bottom: 10px;
-  font-weight: 500;
+.project-feature__body {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: start;
 }
 
-.project__features ul {
+@media (max-width: 900px) {
+  .project-feature__body {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.project-feature__lead {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 24px;
+  gap: 18px;
 }
 
-.project__features li {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  padding-left: 18px;
-  position: relative;
-  word-break: break-word;
+.project-feature__name {
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
 }
 
-.project__features li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 9px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
+.project-feature__desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.project-feature__tech-stack {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
 }
 
 .project__links {
   display: flex;
-  gap: 12px;
   flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
 }
 
-.projects__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+/* Feature Specification Box */
+.project-feature__spec {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+  padding: 28px;
 }
 
-@media (max-width: 900px) {
-  .projects__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.project-feature__spec-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
 }
 
-@media (max-width: 620px) {
-  .projects__grid {
-    grid-template-columns: 1fr;
-  }
-  .project--featured {
-    padding: 26px;
-  }
-}
-
-@media (max-width: 480px) {
-  .project--featured {
-    padding: 20px 16px;
-  }
-  .projects__grid .project {
-    padding: 20px 16px !important;
-  }
-}
-
-.projects__grid .project {
-  padding: 26px;
+.project-feature__spec-list {
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  word-break: break-word;
+  gap: 16px;
 }
 
-.projects__grid .project .project__links {
-  margin-top: auto;
-  padding-top: 8px;
+.project-feature__spec-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.project-feature__bullet {
+  font-size: 1.2rem;
+  color: var(--text-main);
 }
